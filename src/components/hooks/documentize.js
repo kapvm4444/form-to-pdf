@@ -3,7 +3,7 @@ import { autoTable } from "jspdf-autotable";
 
 export function documentize(patient) {
   const fields = Object.keys(patient);
-  const body = fields.map((el) => [el, patient[el]]);
+  const body = fields.map((el) => [`${el}`.toUpperCase(), patient[el]]);
 
   const doc = new jsPDF({
     orientation: "portrait",
@@ -16,13 +16,24 @@ export function documentize(patient) {
   const usableArea = doc.internal.pageSize.width - 10;
 
   autoTable(doc, {
+    styles: {
+      fontSize: 10,
+      fillColor: false, // no fill
+      halign: "center",
+      valign: "middle",
+    },
+    headStyles: {
+      fillColor: [41, 128, 185], // blue background
+      textColor: 255, // white text
+      fontStyle: "bold",
+    },
     startY: 20,
     margin: { left: 5, right: 5 },
     head: [["title", "description"]],
     body,
     columnStyles: {
-      0: { cellWidth: usableArea * 0.3 },
-      1: { cellWidth: usableArea * 0.7 },
+      0: { cellWidth: usableArea * 0.3, halign: "right" },
+      1: { cellWidth: usableArea * 0.7, halign: "left" },
     },
   });
 
