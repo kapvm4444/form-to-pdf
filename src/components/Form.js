@@ -42,7 +42,7 @@ export default function Form() {
             </TextField>
 
             {/*Gender*/}
-            <Dropdown options={genders} value={gender} onChange={el => setGender(el.target.value)}></Dropdown>
+            <Dropdown options={genders} value={gender} onChange={el => setGender(el.target.value)}>Gender</Dropdown>
 
             {/*Mobile*/}
             <TextField placeholder={"+91 "} value={mobile} onChange={el => setMobile(el.target.value)}>
