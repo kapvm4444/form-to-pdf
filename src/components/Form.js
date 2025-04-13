@@ -66,11 +66,11 @@ export default function Form() {
 
             {/*Diagnosis*/}
             <Dropdown options={diagnosisValues} value={diagnosis}
-                      onChange={el => setDiagnosis(el.target.value)}></Dropdown>
+                      onChange={el => setDiagnosis(el.target.value)}>Diagnosis</Dropdown>
 
             {/*Treatment*/}
             <Dropdown options={treatmentValues} value={treatment}
-                      onChange={el => setTreatment(el.target.value)}></Dropdown>
+                      onChange={el => setTreatment(el.target.value)}>Treatment</Dropdown>
 
             {/*Medicine*/}
             <TextField type='textarea' value={medicine} onChange={el => setMedicine(el.target.value)}>
