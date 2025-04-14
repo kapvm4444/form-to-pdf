@@ -3,13 +3,13 @@ import { autoTable } from "jspdf-autotable";
 
 export function documentize(patient, doctor = "Dr. ABC") {
   //LABEL
-  // Setting the values for table
+  // Setting the configuration values for table
   const fields = Object.keys(patient);
 
   const patientInfoBody = fields
     .filter((el) => el !== /diagnosis|treatment|medicine/)
     .map((el) => [
-      { content: capitalize(el), style: { fontStyle: "bold" } },
+      { content: `${capitalize(el)}:`, style: { fontStyle: "bold" } },
       patient[el],
     ]);
 
@@ -25,6 +25,16 @@ export function documentize(patient, doctor = "Dr. ABC") {
       },
     ],
   ];
+
+  //table style
+  const tableStyle = {
+    fontSize: 12,
+    fillColor: false,
+    halign: "center",
+    valign: "middle",
+    lineWidth: 0.1,
+    lineColor: [134, 134, 135],
+  };
 
   //LABEL
   // creating the page layout (page object)
@@ -59,12 +69,7 @@ export function documentize(patient, doctor = "Dr. ABC") {
   //=>
   // doctor info and date table
   autoTable(doc, {
-    styles: {
-      fontSize: 12,
-      fillColor: false,
-      halign: "center",
-      valign: "middle",
-    },
+    styles: tableStyle,
     theme: "plain",
     startY: 23,
     margin: { left: 5, right: 5 },
@@ -97,13 +102,7 @@ export function documentize(patient, doctor = "Dr. ABC") {
   //=>
   // doctor info and date table
   autoTable(doc, {
-    styles: {
-      fontSize: 12,
-      fillColor: false,
-      halign: "center",
-      valign: "middle",
-      minCellHeight: 15,
-    },
+    styles: { ...tableStyle, minCellHeight: 15 },
     theme: "plain",
     startY: lastY + 13,
     margin: { left: 5, right: 5 },
