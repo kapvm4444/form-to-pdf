@@ -8,7 +8,7 @@ const genders = ["Male", "Female", "Other"];
 const diagnosisValues = ["A", "B", "C"];
 const treatmentValues = ["A", "B", "C"];
 
-export default function Form() {
+export default function Form({ doctor }) {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("Male");
@@ -21,18 +21,21 @@ export default function Form() {
   const [medicine, setMedicine] = useState("");
 
   function handleSubmit(print) {
-    documentize({
-      name,
-      age,
-      gender,
-      mobile,
-      village,
-      city,
-      state,
-      diagnosis,
-      treatment,
-      medicine,
-    });
+    documentize(
+      {
+        name,
+        age,
+        gender,
+        mobile,
+        village,
+        city,
+        state,
+        diagnosis,
+        treatment,
+        medicine,
+      },
+      doctor,
+    );
   }
 
   function handleClear() {
